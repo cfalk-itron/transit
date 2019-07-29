@@ -29,7 +29,7 @@ public class MeterPlane extends AbstractPlane {
 
 	public static void main(String[] args) {
 		final Kernel kernel = ServerLoader.loadServer();
-		final Fabric fabric = (Fabric) kernel.getSpace("main.java.meterDataSim");
+		final Fabric fabric = (Fabric) kernel.getSpace("transit");
 
 		kernel.start();
 		System.out.println("Running MeterPlane");
