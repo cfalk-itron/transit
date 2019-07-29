@@ -97,7 +97,6 @@ public class MeterAgent extends AbstractAgent {
 	
 	private void addMeter(String thisMeterId, DataGeneration meter) {
 		this.meters.put("meter/"+meter.withMeterId(thisMeterId).getTitle()+"/"+thisMeterId, meter.withMeterId(thisMeterId)); 
-		System.out.println("Meter "+thisMeterId+" updated");
 	}
 	
 	@Override
