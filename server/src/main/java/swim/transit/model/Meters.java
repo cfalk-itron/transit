@@ -22,7 +22,7 @@ public class Meters {
 	}
 	
 	public void add(DataGeneration meter) {
-		meters.put("meter/"+meter.getMeterId(), meter); // I imagine meterId is unique per meter and therefore functions as an adequate identifier
+		meters.put("meter/"+meter.getTitle()+"/"+meter.getMeterId(), meter); // I imagine meterId is unique per meter and therefore functions as an adequate identifier
 	}
 	
 	@Kind 
