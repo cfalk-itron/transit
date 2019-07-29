@@ -17,7 +17,7 @@ import swim.transit.model.DataGeneration;
 
 public class MeterPlane extends AbstractPlane {
 	@SwimAgent("meter")
-	@SwimRoute("meter/:meterId")
+	@SwimRoute("meter/:title/:meterId")
 	AgentRoute<MeterAgent> meterAgent;
 
 	// if there were to be more agents, you would follow the pattern below
@@ -45,7 +45,7 @@ public class MeterPlane extends AbstractPlane {
 		for (DataGeneration meter: meters) {
 			// System.out.println(meter); // uncomment to confirm that meter data String[]s have been correctly parsed into DataSource objects
 			// System.out.println(meter.toValue) //uncomment to see how meter DataGeneration instance gets parsed into Recon
-			 swim.command("meter/"+meter.getMeterId(), "addMeter", meter.toValue());
+			 swim.command("meter/"+meter.getTitle()+"/"+meter.getMeterId(), "addMeter", meter.toValue());
 
 		}
 		try {
