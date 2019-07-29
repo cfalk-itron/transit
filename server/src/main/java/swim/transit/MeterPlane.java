@@ -12,8 +12,8 @@ import swim.fabric.Fabric;
 import swim.kernel.Kernel;
 import swim.server.ServerLoader;
 
-import main.java.meterDataSim.agent.MeterAgent;
-import main.java.meterDataSim.model.DataGeneration;
+import swim.transit.agent.MeterAgent;
+import swim.transit.model.DataGeneration;
 
 public class MeterPlane extends AbstractPlane {
 	@SwimAgent("meter")
