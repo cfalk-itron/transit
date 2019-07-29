@@ -40,24 +40,24 @@ public class MeterPlane extends AbstractPlane {
 	}
 
 	private static void startMeterDataGeneration(SwimRef swim) {
+		final DataSource dataSource = new DataSource(swim);
 		// this invokes getMeterData and adds them with the command lane
-		final List<DataGeneration> meters = getMeterDataGenerations();
+		final List<DataGeneration> meters = getMeterDataGenerations(dataSource);
 		for (DataGeneration meter: meters) {
 			// System.out.println(meter); // uncomment to confirm that meter data String[]s have been correctly parsed into DataSource objects
 			// System.out.println(meter.toValue) //uncomment to see how meter DataGeneration instance gets parsed into Recon
 			 swim.command("meter/"+meter.getTitle()+"/"+meter.getMeterId(), "addMeter", meter.toValue());
-
 		}
 		try {
 			Thread.sleep(3000);
 		} catch (InterruptedException e) {
 
 		}
+		dataSource.repeatSendMeterData(meters);
 	}
 
-	private static List<DataGeneration> getMeterDataGenerations() {
+	private static List<DataGeneration> getMeterDataGenerations(DataSource dataSource) {
 		final List<DataGeneration> meters = new ArrayList<>();
-		final DataSource dataSource = new DataSource();
 		for (String[] data : dataSource.generateData()) {
 			meters.add(new DataGeneration(data[0], data[1], Float.parseFloat(data[2]), Float.parseFloat(data[3]),
 					Float.parseFloat(data[4]), Float.parseFloat(data[5]), Float.parseFloat(data[6]),
