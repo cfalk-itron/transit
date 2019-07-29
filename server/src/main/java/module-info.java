@@ -20,5 +20,5 @@ open module swim.transit {
   exports swim.transit;
   exports swim.transit.model;
 
-  provides swim.api.plane.Plane with swim.transit.TransitPlane;
+  provides swim.api.plane.Plane with swim.transit.MeterPlane;
 }

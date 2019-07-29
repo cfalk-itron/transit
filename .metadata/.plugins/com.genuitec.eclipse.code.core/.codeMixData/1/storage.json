@@ -1,0 +1,14 @@
+{
+    "telemetry.machineId": "0e7a0cb39969aac34df89e77761ddfe0fd1f6252a8461f0a53983b9712966a29",
+    "openedPathsList": {
+        "workspaces3": [
+            {
+                "id": "a80d38d04c88a339c824834247ff8f30",
+                "configURIPath": "file:///c%3A/Users/cfalk/transit/.metadata/codemix.code-workspace"
+            }
+        ],
+        "files2": []
+    },
+    "theme": "vs-dark",
+    "themeBackground": "#221a0f"
+}

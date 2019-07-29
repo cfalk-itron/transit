@@ -19,7 +19,7 @@ idea.module.outputDir file("out/production/classes")
 group = 'ai.swim'
 description = 'Real-time Transit App'
 version = project.property('application.version')
-mainClassName = 'swim.transit.TransitPlane'
+mainClassName = 'swim.transit.MeterPlane'
 ext.moduleName = 'swim.transit'
 ext.compilerArgs = ['-Xlint:all']
 
