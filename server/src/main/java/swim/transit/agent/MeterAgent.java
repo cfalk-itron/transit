@@ -53,7 +53,6 @@ public class MeterAgent extends AbstractAgent {
 //		});
 	
 	private void onDataGeneration(DataGeneration meter) {
-		System.out.println("TEST: this method gets executed");
 		final long time = System.currentTimeMillis() - (meter.getSecsSinceReport() * 1000L);
 		
 		this.meter.set(meter); // TODO: a bit confusing, but this.meter refers to the meter value lane; meter is the argument passed through onDataGeneration()
@@ -80,8 +79,8 @@ public class MeterAgent extends AbstractAgent {
 		for (DataGeneration meter : newMeters.getMeters().values()) {
 			final String thisMeterId = meter.getMeterId();
 			if (thisMeterId != null && !thisMeterId.equals("")) {
-				context.command("meter/"+thisMeterId, "addMeter", meter.toValue());
-				addMeter("meter/"+thisMeterId, meter);
+				context.command("meter/"+meter.withMeterId(thisMeterId).getTitle()+"/"+thisMeterId, "addMeter", meter.toValue());
+				addMeter("meter/"+meter.withMeterId(thisMeterId).getTitle()+"/"+thisMeterId, meter);
 			}
 		}
 		metersCount.set(this.meters.size());
@@ -97,7 +96,7 @@ public class MeterAgent extends AbstractAgent {
 	}
 	
 	private void addMeter(String thisMeterId, DataGeneration meter) {
-		this.meters.put("meter/"+thisMeterId, meter.withMeterId(thisMeterId)); 
+		this.meters.put("meter/"+meter.withMeterId(thisMeterId).getTitle()+"/"+thisMeterId, meter.withMeterId(thisMeterId)); 
 	}
 	
 	@Override
