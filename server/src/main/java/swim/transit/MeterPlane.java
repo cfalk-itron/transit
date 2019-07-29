@@ -56,7 +56,6 @@ public class MeterPlane extends AbstractPlane {
 	}
 
 	private static List<DataGeneration> getMeterDataGenerations() {
-		// this method takes in
 		final List<DataGeneration> meters = new ArrayList<>();
 		final DataSource dataSource = new DataSource();
 		for (String[] data : dataSource.generateData()) {
