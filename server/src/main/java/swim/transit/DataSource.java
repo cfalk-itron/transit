@@ -4,6 +4,14 @@ import java.util.Random;
 
 import swim.api.ref.SwimRef;
 import swim.structure.Record;
+import swim.structure.Form;
+import swim.structure.Item;
+import swim.structure.Value;
+import java.util.List;
+import java.util.concurrent.Executors;
+import java.util.concurrent.ScheduledExecutorService;
+import java.util.concurrent.TimeUnit;
+import swim.transit.model.*;
 
 public class DataSource {
 	// this will be accessed by meter plane and provide data about new meters
@@ -14,8 +22,30 @@ public class DataSource {
 		this.swim = swim;
 		// isn't used for the time being but could be if you wanted to call a command lane from this file
 	}
-	public DataSource() {
-		this.swim = null;
+	
+	public void repeatSendMeterData(List<DataGeneration> meters) {
+		for (DataGeneration m : meters) {
+			final ScheduledExecutorService run = Executors.newSingleThreadScheduledExecutor();
+			run.scheduleAtFixedRate(() -> sendMeterData(m), 5, 5, TimeUnit.SECONDS); // to change data ever 15 minutes: 15, TimeUnit.MINUTES
+			
+		}
+	}
+	
+	public void sendMeterData(DataGeneration m) {
+		final Meters meters = getMetersData(m);
+		if (meters != null && meters.getMeters().size() > 0) {
+			final Value value = Form.forClass(Meters.class).mold(meters).toValue();
+			swim.command("meter/"+m.getTitle()+"/"+m.getMeterId(), "addMeters", value);
+//			System.out.println(m.getTemp());
+		}
+	}
+	
+	private Meters getMetersData(DataGeneration m) {	
+		final Meters meters = new Meters();
+		final DataGeneration meter = new DataGeneration().withMeterId(m.getMeterId()).withTitle(m.getTitle()).withLatitude(m.getLatitude()).withLongitude(m.getLongitude())
+                .withkWh(Float.parseFloat(generateMeterData(100.0f, 500.0f))).withVoltage(Float.parseFloat(generateMeterData(9.0f, 20.0f))).withTemp(Float.parseFloat(generateMeterData(60.0f, 80.0f)));
+		meters.add(meter);
+		return meters;
 	}
 	
 	String[][] generateData() {
@@ -42,7 +72,6 @@ public class DataSource {
 		allMeters[19] = new String[] { "20", "Villa_33", "21.823039", "-72.340506", generateMeterData(100.0f, 500.0f), generateMeterData(9.0f, 20.0f), generateMeterData(60.0f, 80.0f), "-1"};
 				
 		return allMeters;
-
 		
 	}
 	
