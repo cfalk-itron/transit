@@ -1,4 +1,4 @@
-package main.java.meterDataSim.model;
+package swim.transit.model;
 
 import java.util.Objects;
 import swim.structure.Form;

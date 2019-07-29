@@ -10,8 +10,7 @@ import swim.api.lane.ValueLane;
 import java.util.Collection;
 import java.util.Map;
 
-import main.java.meterDataSim.model.DataGeneration;
-import main.java.meterDataSim.model.Meters;
+import swim.transit.model.*;
 
 public class MeterAgent extends AbstractAgent {
 	
